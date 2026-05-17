@@ -1,0 +1,301 @@
+/* =========================================
+   1. CẤU HÌNH CHUNG & HÌNH NỀN
+   ========================================= */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif; /* Font chữ hiện đại hơn */
+    height: 100vh;
+    overflow: hidden; /* Chặn cuộn trang */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Ảnh nền */
+    background: url('img.jpg') no-repeat center center fixed; 
+    background-size: cover;
+    color: white;
+}
+
+/* Scrollbar (Thanh cuộn) đẹp hơn cho danh sách */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); border-radius: 4px; }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.3); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.5); }
+
+/* CLASS DÙNG CHUNG: Hiệu ứng kính mờ (Glassmorphism) */
+.glass {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px); /* Độ mờ nền */
+    box-shadow: 0 15px 25px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Viền mỏng sáng nhẹ */
+}
+
+/* Nút bấm xanh lá (Dùng cho cả Login và Modal) */
+.btn-submit {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #009933;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+.btn-submit:hover {
+    background-color: #00b33c;
+    box-shadow: 0 0 15px #00b33c;
+}
+
+/* =========================================
+   2. TRANG ĐĂNG NHẬP (LOGIN PAGE)
+   ========================================= */
+.login-box {
+    width: 400px;
+    padding: 40px;
+    border-radius: 10px;
+    /* Kế thừa hiệu ứng kính từ class .glass hoặc viết lại tại đây */
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
+}
+
+.login-box h2 {
+    margin: 0 0 30px;
+    padding: 0;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.login-box .user-box { position: relative; }
+
+.login-box .user-box input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+}
+
+.login-box .user-box label {
+    position: absolute;
+    top: 0; left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s;
+}
+
+/* Hiệu ứng chữ label bay lên */
+.login-box .user-box input:focus ~ label,
+.login-box .user-box input:valid ~ label {
+    top: -20px; left: 0;
+    color: #03e9f4; font-size: 12px;
+}
+
+.footer-text {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+}
+.footer-text a { color: #fff; text-decoration: none; font-weight: bold; }
+
+/* =========================================
+   3. TRANG DASHBOARD (QUẢN LÝ)
+   ========================================= */
+.dashboard-container {
+    display: flex;
+    width: 90%;
+    max-width: 1200px;
+    height: 85vh; /* Chiếm 85% chiều cao màn hình */
+    gap: 20px;
+}
+
+/* --- Sidebar (Cột bên trái) --- */
+.sidebar {
+    width: 250px;
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    width: 100%;
+    padding-bottom: 20px;
+}
+.profile i { font-size: 60px; margin-bottom: 10px; color: #03e9f4; }
+
+.menu { list-style: none; padding: 0; width: 100%; }
+.menu li { margin: 10px 0; }
+
+.menu a {
+    text-decoration: none;
+    color: rgba(255,255,255,0.8);
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    transition: 0.3s;
+    border-radius: 10px;
+}
+.menu a i { margin-right: 15px; width: 20px; text-align: center; }
+
+.menu a:hover, .menu li.active a {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    border-left: 4px solid #03e9f4; /* Viền sáng bên trái khi active */
+}
+
+/* --- Main Content (Nội dung chính) --- */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* --- Cards (3 Thẻ thống kê) --- */
+.cards-container {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.card {
+    flex: 1;
+    padding: 25px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.3s;
+}
+.card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+
+.card-info h3 { margin: 0; font-size: 14px; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px; }
+.card-info p { margin: 10px 0 0; font-size: 26px; font-weight: bold; }
+.card .icon { font-size: 45px; opacity: 0.4; }
+
+/* Màu chữ riêng cho từng loại thẻ */
+.income p { color: #00ff88; text-shadow: 0 0 10px rgba(0,255,136,0.3); }
+.expense p { color: #ff4d4d; text-shadow: 0 0 10px rgba(255,77,77,0.3); }
+.balance p { color: #03e9f4; text-shadow: 0 0 10px rgba(3,233,244,0.3); }
+
+/* --- Transaction List (Danh sách giao dịch) --- */
+.transactions-section {
+    flex: 1; /* Chiếm hết phần còn lại của chiều cao */
+    border-radius: 20px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Để scrollbar nằm bên trong */
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 15px;
+}
+.section-header h2 { font-size: 20px; margin: 0; }
+
+.btn-add {
+    background: linear-gradient(45deg, #03e9f4, #0099ff);
+    border: none; color: white;
+    padding: 8px 16px; border-radius: 20px;
+    font-weight: bold; cursor: pointer;
+    box-shadow: 0 0 10px rgba(3,233,244,0.3);
+}
+
+.transaction-list {
+    overflow-y: auto; /* Cho phép cuộn danh sách */
+    flex: 1;
+    padding-right: 5px;
+}
+
+.transaction-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255,255,255,0.07);
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    transition: 0.2s;
+    border-left: 4px solid transparent;
+}
+.transaction-item:hover { background: rgba(255,255,255,0.15); }
+
+.t-info { display: flex; flex-direction: column; }
+.t-cat { font-weight: bold; font-size: 16px; margin-bottom: 4px; }
+.t-date { font-size: 12px; opacity: 0.6; }
+
+.t-amount { font-weight: bold; font-size: 18px; }
+.t-amount.income { color: #00ff88; }
+.t-amount.expense { color: #ff4d4d; }
+
+.btn-del {
+    background: none; border: none; color: #ff4d4d;
+    cursor: pointer; font-size: 16px; opacity: 0.3; transition: 0.3s;
+}
+.btn-del:hover { opacity: 1; transform: scale(1.2); }
+
+/* =========================================
+   4. MODAL (CỬA SỔ NHẬP LIỆU)
+   ========================================= */
+.modal {
+    display: none; 
+    position: fixed; z-index: 100; left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.8); /* Nền tối làm nổi modal */
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    margin: 8% auto;
+    padding: 30px;
+    width: 400px;
+    border-radius: 15px;
+    position: relative;
+    /* Dùng style của class .glass nhưng đậm hơn chút */
+    background: rgba(20, 20, 20, 0.9);
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 0 30px rgba(3, 233, 244, 0.2);
+}
+
+.close {
+    position: absolute; right: 20px; top: 15px;
+    font-size: 28px; cursor: pointer; color: #aaa;
+}
+.close:hover { color: white; }
+
+/* Input trong Modal */
+.input-group { margin-bottom: 20px; }
+.input-group label { display: block; margin-bottom: 8px; font-weight: bold; color: #ddd; }
+
+.input-group input, .input-group select {
+    width: 100%; padding: 12px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white; border-radius: 8px;
+    font-size: 16px; outline: none;
+    box-sizing: border-box; 
+}
+.input-group input:focus { border-color: #03e9f4; background: rgba(255,255,255,0.15); }
+.input-group select option { background: #333; color: white; } 
